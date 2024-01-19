@@ -53,7 +53,7 @@ class Program
         var fileMetadata = new Google.Apis.Drive.v3.Data.File()
         {
             Name = Path.GetFileName(fileName),
-            Parents = new List<string> { "1c87jtEK0ry_1bwcFXAYRmluqXFiP7xtf" }, // Reemplaza "ID_DEL_DIRECTORIO" con el ID real del directorio
+            Parents = new List<string> { "1c87jtEK0ry_1bwcFXAYRmluqXFiP7xtf" },
         };
 
         FilesResource.CreateMediaUpload request;
