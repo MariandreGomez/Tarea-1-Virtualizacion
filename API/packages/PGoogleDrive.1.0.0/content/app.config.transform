@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<configuration>
+  <configSections>
+    <section name="PGDrive" type="PGoogleDrive.Internal.Models.General.PGDriveConfigSection, PGoogleDrive, Version=1.0.0.0, Culture=neutral, PublicKeyToken=773d8571e9ac5365" />
+  </configSections>
+
+  <PGDrive>
+    <OAuthDrives></OAuthDrives>
+    <ApiKeyDrives></ApiKeyDrives>
+  </PGDrive>
+
+</configuration>

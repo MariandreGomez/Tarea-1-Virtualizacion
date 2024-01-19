@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="PGDrive">
+    <xs:complexType>
+      <xs:all>
+        <xs:element name="OAuthDrives" type="OAuthDrivesList_Type" minOccurs="0" maxOccurs="1" />
+        <xs:element name="ApiKeyDrives" type="ApiKeyDrivesList_Type" minOccurs="0" maxOccurs="1" />
+      </xs:all>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:complexType name="OAuthDrivesList_Type">
+    <xs:sequence>
+      <xs:element name="drive" type="OAuthDrive_Type" minOccurs="0" maxOccurs="unbounded" />
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="ApiKeyDrivesList_Type">
+    <xs:sequence>
+      <xs:element name="drive" type="ApiKeyDrive_Type" minOccurs="0" maxOccurs="unbounded" />
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="OAuthDrive_Type">
+    <xs:attribute name="name" type="PGDriveNonEmptyStr_Type" use="required" />
+    <xs:attribute name="applicationName" type="PGDriveNonEmptyStr_Type" use="required" />
+    <xs:attribute name="clientSecretPath" type="PGDriveNonEmptyStr_Type" use="required" />
+  </xs:complexType>
+  
+  <xs:complexType name="ApiKeyDrive_Type">
+    <xs:attribute name="name" type="PGDriveNonEmptyStr_Type" use="required" />
+    <xs:attribute name="apiKey" type="PGDriveNonEmptyStr_Type" use="required" />
+  </xs:complexType>
+
+
+  <xs:simpleType name="PGDriveBoolean_Type">
+    <xs:restriction base="xs:NMTOKEN">
+      <xs:enumeration value="false" />
+      <xs:enumeration value="true" />
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="PGDriveNonEmptyStr_Type">
+    <xs:restriction base="xs:string">
+      <xs:minLength value="3" />
+    </xs:restriction>
+  </xs:simpleType>
+
+</xs:schema>

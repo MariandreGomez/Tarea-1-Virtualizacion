@@ -1,0 +1,761 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>PGoogleDrive</name>
+    </assembly>
+    <members>
+        <member name="T:PGoogleDrive.Internal.Models.General.FileDownloadResult">
+            <summary>
+            Model that Download file method returns
+            </summary>
+        </member>
+        <member name="P:PGoogleDrive.Internal.Models.General.FileDownloadResult.FileMemoryStream">
+            <summary>
+            Memory stream of downloaded files.
+            Could be converted into a file stream.
+            </summary>
+        </member>
+        <member name="P:PGoogleDrive.Internal.Models.General.FileDownloadResult.FileMimeType">
+            <summary>
+            Mime type of downloaded file
+            </summary>
+        </member>
+        <member name="P:PGoogleDrive.Internal.Models.General.FileDownloadResult.Extension">
+            <summary>
+            EXtension of downloaded file
+            </summary>
+        </member>
+        <member name="M:PGoogleDrive.Internal.Models.General.FileDownloadResult.#ctor(System.IO.MemoryStream,System.String,System.String)">
+            <summary>
+            Initializes result
+            </summary>
+            <param name="stream"></param>
+            <param name="FileMimeType"></param>
+            <param name="extension"></param>
+        </member>
+        <member name="T:PGoogleDrive.Internal.Models.General.ServiceModule">
+            <summary>
+            Module that represents parent for all modules with functionality of PGDrive
+            </summary>
+        </member>
+        <member name="P:PGoogleDrive.Internal.Models.General.ServiceModule.driveService">
+            <summary>
+            Drive service of Google rive api
+            </summary>
+        </member>
+        <member name="M:PGoogleDrive.Internal.Models.General.ServiceModule.#ctor(Google.Apis.Drive.v3.DriveService)">
+            <summary>
+            Initializes module with drive service
+            </summary>
+            <param name="service"></param>
+        </member>
+        <member name="T:PGoogleDrive.Internal.Models.General.PGDriveResult`1">
+            <summary>
+            Almost all methods of PGDrive class returns objects of this class with different bodies that Google Drive API returns 
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="P:PGoogleDrive.Internal.Models.General.PGDriveResult`1.isSuccess">
+            <summary>
+            Is request to google drive was successful
+            </summary>
+        </member>
+        <member name="P:PGoogleDrive.Internal.Models.General.PGDriveResult`1.ResponseBody">
+            <summary>
+            ResponseBody contains data that was returned to user via Google Drive api
+            </summary>
+        </member>
+        <member name="P:PGoogleDrive.Internal.Models.General.PGDriveResult`1.Error">
+            <summary>
+            If request wasn't successful - this object represents type and reason of error
+            </summary>
+        </member>
+        <member name="M:PGoogleDrive.Internal.Models.General.PGDriveResult`1.#ctor">
+            <summary>
+            </summary>
+        </member>
+        <member name="T:PGoogleDrive.Internal.Models.Scopes.PGScope">
+            <summary>
+            Represents an abstract class for containig list of google drive api scopes
+            </summary>
+        </member>
+        <member name="M:PGoogleDrive.Internal.Models.Scopes.PGScope.#ctor(System.String)">
+            <summary>
+            Initialize this PGScope with a string scope
+            </summary>
+            <param name="Scope"></param>
+        </member>
+        <member name="P:PGoogleDrive.Internal.Models.Scopes.PGScope.Scopes">
+            <summary>
+            Contain all included into this object scopes
+            </summary>
+        </member>
+        <member name="M:PGoogleDrive.Internal.Models.Scopes.PGScope.And(PGoogleDrive.Internal.Models.Scopes.PGScope)">
+            <summary>
+            Adds a new scope to this object from andObject
+            </summary>
+            <param name="andObject"></param>
+            <returns></returns>
+        </member>
+        <member name="T:PGoogleDrive.Internal.Models.Search.MimeTypes.Generic">
+            <summary>
+            Generic group of mime types
+            </summary>
+        </member>
+        <member name="T:PGoogleDrive.Internal.Models.Permissions.DeletePermissionsModule">
+            <summary>
+            Module that represents methods of deleting permissions
+            </summary>
+        </member>
+        <member name="M:PGoogleDrive.Internal.Models.Permissions.DeletePermissionsModule.#ctor(Google.Apis.Drive.v3.DriveService)">
+            <summary>
+            Initializes module with service
+            </summary>
+            <param name="service"></param>
+        </member>
+        <member name="M:PGoogleDrive.Internal.Models.Permissions.DeletePermissionsModule.DeleteFilePermission(System.String,Google.Apis.Drive.v3.DriveService,Google.Apis.Drive.v3.Data.Permission)">
+            <summary>
+            Method must implement deleting of file permission in general
+            </summary>
+            <param name="fileId"></param>
+            <param name="service"></param>
+            <param name="permission"></param>
+            <returns></returns>
+        </member>
+        <member name="M:PGoogleDrive.Internal.Models.Permissions.DeletePermissionsModule.DeleteFilePermission(System.String,PGoogleDrive.Internal.Services.Permissions.Types,PGoogleDrive.Internal.Services.Permissions.Roles,System.String,System.String)">
+            <summary>
+            Method must implement deleting of the file permission in more friendly way
+            </summary>
+            <param name="fileId"></param>
+            <param name="type"></param>
+            <param name="role"></param>
+            <param name="email"></param>
+            <param name="domain"></param>
+            <returns></returns>
+        </member>
+        <member name="M:PGoogleDrive.Internal.Models.Permissions.DeletePermissionsModule.DeletePermission(System.String,Google.Apis.Drive.v3.Data.Permission)">
+             <summary>
+             Deletes permission of file using Permission object itself
+             </summary>
+             <param name="Id">Id of file or folder to delete permission from</param>
+             <param name="permission">Object of permission itself</param>
+            <returns>PGDriveResult with bool in ResponseBody which shows did permission was deleted or not</returns>
+        </member>
+        <!-- Badly formed XML comment ignored for member "M:PGoogleDrive.Internal.Models.Permissions.DeletePermissionsModule.DeletePermissionUser(System.String,PGoogleDrive.Internal.Services.Permissions.Roles,System.String)" -->
+        <!-- Badly formed XML comment ignored for member "M:PGoogleDrive.Internal.Models.Permissions.DeletePermissionsModule.DeletePermissionGroup(System.String,PGoogleDrive.Internal.Services.Permissions.Roles,System.String)" -->
+        <!-- Badly formed XML comment ignored for member "M:PGoogleDrive.Internal.Models.Permissions.DeletePermissionsModule.DeletePermissionDomain(System.String,PGoogleDrive.Internal.Services.Permissions.Roles,System.String)" -->
+        <member name="M:PGoogleDrive.Internal.Models.Permissions.DeletePermissionsModule.DeletePermissionAnyone(System.String,PGoogleDrive.Internal.Services.Permissions.Roles)">
+             <summary>
+             Deletes permission from a file or a folder from all users
+             </summary>
+             <param name="fileOrFolderId">Id of file or folder from which you want to delete permission</param>
+             <param name="role">Role which you want to delete from all users</param>
+            <returns>PGDriveResult with bool in ResponseBody which shows did permission was deleted or not</returns>
+        </member>
+        <member name="T:PGoogleDrive.Internal.Models.Permissions.CreatePermissionsModule">
+            <summary>
+            Module that represents methods of creating permissions
+            </summary>
+        </member>
+        <member name="M:PGoogleDrive.Internal.Models.Permissions.CreatePermissionsModule.#ctor(Google.Apis.Drive.v3.DriveService)">
+            <summary>
+            Initializes module with service
+            </summary>
+            <param name="service">Drive service to initialize</param>
+        </member>
+        <member name="M:PGoogleDrive.Internal.Models.Permissions.CreatePermissionsModule.CreateFilePermission(System.String,Google.Apis.Drive.v3.DriveService,Google.Apis.Drive.v3.Data.Permission)">
+            <summary>
+            Method that must implement creating of file permission in general
+            </summary>
+            <param name="Id"></param>
+            <param name="service"></param>
+            <param name="permission"></param>
+            <returns></returns>
+        </member>
+        <member name="M:PGoogleDrive.Internal.Models.Permissions.CreatePermissionsModule.CreateFilePermission(System.String,PGoogleDrive.Internal.Services.Permissions.Types,PGoogleDrive.Internal.Services.Permissions.Roles,System.String,System.String)">
+            <summary>
+            Method that must implement creating of file permission in more friendly way
+            </summary>
+            <param name="Id"></param>
+            <param name="type"></param>
+            <param name="role"></param>
+            <param name="email"></param>
+            <param name="domain"></param>
+            <returns></returns>
+        </member>
+        <member name="M:PGoogleDrive.Internal.Models.Permissions.CreatePermissionsModule.AddPermissionUser(System.String,PGoogleDrive.Internal.Services.Permissions.Roles,System.String)">
+             <summary>
+             Adds permission to file or a folder to a specific user
+             </summary>
+             <param name="fileOrFolderId">Id of file or folder to which you want to add permission</param>
+             <param name="role">Role which you want to add to a specific user for a file or folder</param>
+             <param name="userEmail">Email of user to which you want to give that permission</param>
+            <returns>PGDriveResult with created permission in responseBody</returns>
+        </member>
+        <member name="M:PGoogleDrive.Internal.Models.Permissions.CreatePermissionsModule.AddPermissionGroup(System.String,PGoogleDrive.Internal.Services.Permissions.Roles,System.String)">
+             <summary>
+             Adds permission to file or a folder to a specific google group
+             </summary>
+             <param name="fileOrFolderId">Id of file or folder to which you want to add permission</param>
+             <param name="role">Role which you want to add to a specific user for a file or folder</param>
+             <param name="groupEmail">Email of google group to which you want to give that permission</param>
+            <returns>PGDriveResult with created permission in responseBody</returns>
+        </member>
+        <member name="M:PGoogleDrive.Internal.Models.Permissions.CreatePermissionsModule.AddPermissionDomain(System.String,PGoogleDrive.Internal.Services.Permissions.Roles,System.String)">
+             <summary>
+             Adds permission to file or a folder to a specific domain
+             </summary>
+             <param name="fileOrFolderId">Id of file or folder to which you want to add permission</param>
+             <param name="role">Role which you want to add to a specific user for a file or folder</param>
+             <param name="domain">domain which you want to give that permission</param>
+            <returns>PGDriveResult with created permission in responseBody</returns>
+        </member>
+        <member name="M:PGoogleDrive.Internal.Models.Permissions.CreatePermissionsModule.AddPermissionAnyone(System.String,PGoogleDrive.Internal.Services.Permissions.Roles)">
+             <summary>
+             Adds permission to file or a folder to all users
+             </summary>
+             <param name="fileOrFolderId">Id of file or folder to which you want to add permission</param>
+             <param name="role">Role which you want to add to a specific user for a file or folder</param>
+            <returns>PGDriveResult with created permission in responseBody</returns>
+        </member>
+        <member name="M:PGoogleDrive.Internal.Services.Comments.CreateComment(System.String,Google.Apis.Drive.v3.Data.Comment)">
+            <summary>
+            Creates a comment to a file
+            </summary>
+            <param name="fileId">Id of a file</param>
+            <param name="body">Metadata of a comment</param>
+            <returns>PGDriveResult with a created comment in response body</returns>
+        </member>
+        <member name="M:PGoogleDrive.Internal.Services.Comments.CreateComment(System.String,System.String)">
+            <summary>
+            Creates a comment
+            </summary>
+            <param name="fileId">Id of a file</param>
+            <param name="content">Text of a content</param>
+            <returns>PGDriveResult with a created comment in response body</returns>
+        </member>
+        <member name="M:PGoogleDrive.Internal.Services.Comments.DeleteComment(System.String,System.String)">
+            <summary>
+            Deletes a comment from file
+            </summary>
+            <param name="fileId">Id of a file</param>
+            <param name="commentId">Id of a comment</param>
+            <returns>PGDriveResult with a bool which shows did comment was deleted or not</returns>
+        </member>
+        <member name="M:PGoogleDrive.Internal.Services.Comments.GetComments(System.String,System.Int32)">
+            <summary>
+            Gets all comments form file
+            </summary>
+            <param name="fileId">Id of file</param>
+            <param name="maxCommentsCount">Maximum count of comments which you want to get</param>
+            <returns>PGDriveResult with collection of getted comments</returns>
+        </member>
+        <member name="M:PGoogleDrive.Internal.Services.Comments.GetCommentById(System.String,System.String)">
+            <summary>
+            Gets comment by id
+            </summary>
+            <param name="fileId">Id of a file</param>
+            <param name="commentId">Id of a comment</param>
+            <returns>PGDriveResult with a comment in response body</returns>
+        </member>
+        <member name="M:PGoogleDrive.Internal.Services.Comments.UpdateComment(System.String,System.String,Google.Apis.Drive.v3.Data.Comment)">
+            <summary>
+            Updates comment
+            </summary>
+            <param name="fileId">Id of file</param>
+            <param name="commentId">Id of a comment</param>
+            <param name="body">Metadata of comment</param>
+            <returns>PGDriveResult with updated comment in response body</returns>
+        </member>
+        <member name="M:PGoogleDrive.Internal.Services.Comments.UpdateComment(System.String,System.String,System.String)">
+            <summary>
+            Updates comment
+            </summary>
+            <param name="fileId">Id of file</param>
+            <param name="commentId">Id of a comment</param>
+            <param name="content">Text of a comment</param>
+            <returns>PGDriveResult with updated comment in response body</returns>
+        </member>
+        <member name="M:PGoogleDrive.Internal.Services.Files.CreateFolder(System.String,System.String)">
+            <summary>
+            Creates a folder at the drive
+            </summary>
+            <param name="name">Name of folder</param>
+            <param name="parentFolderId">Id of parent folder for new folder</param>
+            <returns>PGDriveResult which contains created folder metadata in response body</returns>
+        </member>
+        <member name="M:PGoogleDrive.Internal.Services.Files.CreateFile(System.IO.Stream,System.String,System.String,System.String)">
+            <summary>
+            Uploads a file to a drive
+            </summary>
+            <param name="stream">Stream of your file to upload</param>
+            <param name="contentType">MimeType of a file</param>
+            <param name="name">Future name of the file at drive</param>
+            <param name="parentFolderId">Id of parent folder for a new file</param>
+            <returns>PGDriveResult which contains uploaded file metadata in response body</returns>
+        </member>
+        <member name="M:PGoogleDrive.Internal.Services.Files.CreateFile(System.IO.Stream,System.String,Google.Apis.Drive.v3.Data.File,System.String)">
+            <summary>
+            Uploads a file to a drive
+            </summary>
+            <param name="stream">Stream of your file to upload</param>
+            <param name="contentType">MimeType of a file</param>
+            <param name="body">Metadata of future file</param>
+            <param name="parentFolderId">Id of parent folder for a new file</param>
+            <returns>PGDriveResult which contains uploaded file metadata in response body</returns>
+        </member>
+        <member name="M:PGoogleDrive.Internal.Services.Files.CreateFile(System.String,System.String,System.String)">
+            <summary>
+            Uploads a fiile to a drive
+            </summary>
+            <param name="filePath">Path to file which you want to upload</param>
+            <param name="name">Future name of the file</param>
+            <param name="parentFolderId"></param>
+            <returns>PGDriveResult which contains created folder metadata in response body</returns>
+        </member>
+        <member name="M:PGoogleDrive.Internal.Services.Files.GetFiles(PGoogleDrive.Internal.Models.Search.SearchBy,System.Int32)">
+            <summary>
+            Gets all files from a drive using optional search query
+            </summary>
+            <param name="searchPattern">Use static class PGSearch for getting all needed SearchBy classes.
+            Combine them using And, Or, Not methods in them to create a search query
+            </param>
+            <param name="maxFilesCount">Maximum files you need to get</param>
+            <returns></returns>
+        </member>
+        <member name="M:PGoogleDrive.Internal.Services.Files.GetFileById(System.String)">
+            <summary>
+            Gets file by it id
+            </summary>
+            <param name="fileOrFolderId">Id of file or folder</param>
+            <returns></returns>
+        </member>
+        <member name="M:PGoogleDrive.Internal.Services.Files.GetFilesFromFolder(System.String,PGoogleDrive.Internal.Models.Search.SearchBy,System.Int32)">
+            <summary>
+            Gets all files from folder using optional search query
+            </summary>
+            <param name="folderId">Id of a folder</param>
+            <param name="searchPattern">Use static class PGSearch for getting all needed SearchBy classes.
+            Combine them using And, Or, Not methods in them to create a search query
+            </param>
+            <param name="maxFilesCount">Maximum files you need to get</param>
+            <returns>PGDriveResult which contains collection of getted files  in response body</returns>
+        </member>
+        <member name="M:PGoogleDrive.Internal.Services.Files.GetFilesByName(System.String,PGoogleDrive.Internal.Models.Search.SearchBy,System.Int32)">
+            <summary>
+            Gets all files with specific name using optional search query
+            </summary>
+            <param name="fileOrFolderName">Name of a file or folder to search</param>
+            <param name="searchPattern">Use static class PGSearch for getting all needed SearchBy classes.
+            Combine them using And, Or, Not methods in them to create a search query
+            </param>
+            <param name="maxFilesCount">Maximum files you need to get</param>
+            <returns>PGDriveResult which contains collection of getted files  in response body</returns>
+        </member>
+        <member name="M:PGoogleDrive.Internal.Services.Files.DeleteFile(System.String)">
+            <summary>
+            Deletes file or folder with specific id
+            </summary>
+            <param name="fileOrFolderId">Id of a file or folder</param>
+            <returns>PGDriveResult with bool in response body which shows did file was deleted or not</returns>
+        </member>
+        <member name="M:PGoogleDrive.Internal.Services.Files.TrashFile(System.String)">
+            <summary>
+            Moves specific file to trash
+            </summary>
+            <param name="fileOrFolderId"></param>
+            <returns>PGDriveResult with trashed file in response body</returns>
+        </member>
+        <member name="M:PGoogleDrive.Internal.Services.Files.UnTrashFile(System.String)">
+            <summary>
+            Untrashes specific file
+            </summary>
+            <param name="fileOrFolderId"></param>
+            <returns>PGDriveResult with untrashed file in response body</returns>
+        </member>
+        <member name="M:PGoogleDrive.Internal.Services.Files.EmptyTrash(System.String)">
+            <summary>
+            Cleanes the trash from all files
+            </summary>
+            <param name="fileOrFolderId"></param>
+            <returns>PGDriveResult with bool in response body which shows did trash was cleaned or not</returns>
+        </member>
+        <member name="M:PGoogleDrive.Internal.Services.Files.MoveFileToAntherFolder(System.String,System.String)">
+            <summary>
+            Moves file from one folder to another
+            </summary>
+            <param name="fileOrFolderId">Id of file or folder which yu want to move</param>
+            <param name="newFolderId">Id of folder to which you want to move a file</param>
+            <returns>PGDriveResult with moved file in response body</returns>
+        </member>
+        <member name="M:PGoogleDrive.Internal.Services.Files.RemoveAllParents(System.String)">
+            <summary>
+            Removes all parents form a file or folder
+            </summary>
+            <param name="fileOrFolderId">Id of file or folder</param>
+            <returns>PGDriveResult contains file with removed parents in response body</returns>
+        </member>
+        <member name="M:PGoogleDrive.Internal.Services.Files.RemoveParents(System.String,System.Collections.Generic.IList{System.String})">
+            <summary>
+            Removes parents that collection of parents contain from a file
+            </summary>
+            <param name="fileOrFolderId">Id of a file or folder</param>
+            <param name="parents">Collection of folders Id's which would be removed from a file</param>
+            <returns>PGDriveResult contains file with removed parents in response body</returns>
+        </member>
+        <member name="M:PGoogleDrive.Internal.Services.Files.AddParents(System.String,System.Collections.Generic.IList{System.String})">
+            <summary>
+            Adds parents to a file
+            </summary>
+            <param name="fileOrFolderId">Id of a file or folder to adds parents to</param>
+            <param name="parents">Collection of folders Id's which would be added as parents to a file</param>
+            <returns>PGDriveResult contains file with added parents in response body</returns>
+        </member>
+        <member name="M:PGoogleDrive.Internal.Services.Files.DownloadFile(System.String)">
+            <summary>
+            Downloads a file from a drive
+            </summary>
+            <param name="fileId">Id of file</param>
+            <returns>PGDriveResult with a FileDownloadResult which contains memory stream of downloaded file, mimeType
+            and it's extension
+            </returns>
+        </member>
+        <member name="M:PGoogleDrive.Internal.Services.Files.CopyFile(System.String,Google.Apis.Drive.v3.Data.File)">
+            <summary>
+            Copy file and optional change it's metadata
+            </summary>
+            <param name="fileId">Id of file to copy</param>
+            <param name="bodyChanges">Changed file metadata</param>
+            <returns>PGDriveResult with a bool which shows did file was copied in response body</returns>
+        </member>
+        <member name="M:PGoogleDrive.Internal.Services.Files.CopyFile(System.String,System.String,System.String,System.Nullable{System.Boolean},System.Nullable{System.Boolean})">
+            <summary>
+            Copy a file
+            </summary>
+            <param name="fileId"></param>
+            <param name="name"></param>
+            <param name="mimeType"></param>
+            <param name="isStarred"></param>
+            <param name="isTrashed"></param>
+            <returns>PGDriveResult with a bool which shows did file was copied in response body</returns>
+        </member>
+        <member name="M:PGoogleDrive.Internal.Services.Files.UpdateFile(System.String,Google.Apis.Drive.v3.Data.File)">
+            <summary>
+            Updates a file
+            </summary>
+            <param name="fileId">Id of file</param>
+            <param name="bodyUpdates">Changes of file metadata</param>
+            <returns>PGDriveResult with updated file in response body</returns>
+        </member>
+        <member name="M:PGoogleDrive.Internal.Services.Files.UpdateFile(System.String,Google.Apis.Drive.v3.Data.File,System.String)">
+            <summary>
+            Updates a file
+            </summary>
+            <param name="fileId">Id of file</param>
+            <param name="bodyUpdates">Changes of file metadata</param>
+            <param name="filePath">Path to a file which would be a content to update</param>
+            <returns>PGDriveResult with updated file in response body</returns>
+        </member>
+        <member name="M:PGoogleDrive.Internal.Services.Files.UpdateFile(System.String,System.IO.Stream,System.String,Google.Apis.Drive.v3.Data.File)">
+            <summary>
+            Updates a file
+            </summary>
+            <param name="fileId">Id of file</param>
+            <param name="stream">Stream of a file which would be a content to update</param>
+            <param name="contentType">Mime type of a file stream</param>
+            <param name="body">Optional body with metadata file</param>
+            <returns>PGDriveResult with updated file in response body</returns>
+        </member>
+        <member name="M:PGoogleDrive.Internal.Services.Files.UpdateFile(System.String,System.String,System.String,System.String,System.Nullable{System.Boolean},System.Nullable{System.Boolean})">
+            <summary>
+            Updates a file
+            </summary>
+            <param name="fileId">Id of a file</param>
+            <param name="filePath">Path to a file which would be a content to update</param>
+            <param name="name">Future name of a file</param>
+            <param name="mimeType">Mime type of a file</param>
+            <param name="isStarred">Would be file trashed</param>
+            <param name="isTrashed">Would be file starred</param>
+            <returns>PGDriveResult with updated file in response body</returns>
+        </member>
+        <member name="M:PGoogleDrive.Internal.Services.Replies.CreateReply(System.String,System.String,Google.Apis.Drive.v3.Data.Reply)">
+            <summary>
+            Creates a comment to a file
+            </summary>
+            <param name="fileId">Id of a file</param>
+            <param name="commentId">Id of a comment</param>
+            <param name="body">Body of future reply</param>
+            <returns>PGDriveResult with create reply in response body</returns>
+        </member>
+        <member name="M:PGoogleDrive.Internal.Services.Replies.CreateReply(System.String,System.String,System.String)">
+            <summary>
+            Creates a comment to a file
+            </summary>
+            <param name="fileId">Id of a file</param>
+            <param name="commentId">Id of a comment</param>
+            <param name="content">Text of future reply</param>
+            <returns>PGDriveResult with create reply in response body</returns>
+        </member>
+        <member name="M:PGoogleDrive.Internal.Services.Replies.DeleteReply(System.String,System.String,System.String)">
+            <summary>
+            Creates a comment to a file
+            </summary>
+            <param name="fileId">Id of a file</param>
+            <param name="commentId">Id of a comment</param>
+            <param name="replyId">Id of reply to delete</param>
+            <returns>PGDriveResult with bool which shows did reply was deleted or not</returns>
+        </member>
+        <member name="M:PGoogleDrive.Internal.Services.Replies.GetReplies(System.String,System.String,System.Int32)">
+            <summary>
+            Get replies from specific comment
+            </summary>
+            <param name="fileId">Id of a file</param>
+            <param name="commentId">Id of a comment</param>
+            <param name="maxRepliesCount">Maximum count of replies you need</param>
+            <returns>PGDriveResult with collection of getted replies in response body</returns>
+        </member>
+        <member name="M:PGoogleDrive.Internal.Services.Replies.GetReplyById(System.String,System.String,System.String)">
+            <summary>
+            Gets reply by id
+            </summary>
+            <param name="fileId">Id of a fiile</param>
+            <param name="commentId">Id of a comment</param>
+            <param name="replyId">Id of a reply</param>
+            <returns>PGDriveResult with getted reply</returns>
+        </member>
+        <member name="M:PGoogleDrive.Internal.Services.Replies.UpdateReply(System.String,System.String,System.String,Google.Apis.Drive.v3.Data.Reply)">
+            <summary>
+            Updates a  reply
+            </summary>
+            <param name="fileId">Id of a fiile</param>
+            <param name="commentId">Id of a comment</param>
+            <param name="replyId">Id of a reply</param>
+            <param name="body">Future body of a reply to update</param>
+            <returns>PGDriveResult with updated reply</returns>
+        </member>
+        <member name="M:PGoogleDrive.Internal.Services.Replies.UpdateReply(System.String,System.String,System.String,System.String)">
+            <summary>
+            Updates a  reply
+            </summary>
+            <param name="fileId">Id of a fiile</param>
+            <param name="commentId">Id of a comment</param>
+            <param name="replyId">Id of a reply</param>
+            <param name="content">Future text of a reply to update</param>
+            <returns>PGDriveResult with updated reply</returns>
+        </member>
+        <member name="T:PGoogleDrive.Internal.Services.Permissions">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:PGoogleDrive.Internal.Services.Permissions.AddPermissions">
+            <summary>
+            Sub-module which contains all methods to add permissions
+            </summary>
+        </member>
+        <member name="P:PGoogleDrive.Internal.Services.Permissions.DeletePermissions">
+            <summary>
+            Sub-module which contains all methods to delete permissions
+            </summary>
+        </member>
+        <member name="M:PGoogleDrive.Internal.Services.Permissions.#ctor(Google.Apis.Drive.v3.DriveService)">
+            <summary>
+            Initializes Permissions module with drive service
+            </summary>
+            <param name="driveService"></param>
+        </member>
+        <member name="M:PGoogleDrive.Internal.Services.Permissions.GetFilePermissions(System.String)">
+            <summary>
+            Gets all permissions of file or folder
+            </summary>
+            <param name="fileOrFolderId">Id of file or folder to get permissions</param>
+            <returns>PGDriveResult with collection of permissions in responseBody</returns>
+        </member>
+        <member name="T:PGoogleDrive.PGScopes">
+            <summary>
+            Static class for getting all concrete classes of abstract Scope
+            that represents all existing scopes that Google Drive Api provides
+            </summary>
+        </member>
+        <member name="P:PGoogleDrive.PGScopes.Drive">
+            <summary>
+            View and manage the files in your Google Drive
+            </summary>
+        </member>
+        <member name="P:PGoogleDrive.PGScopes.DriveFile">
+            <summary>
+            View and manage Google Drive files and folders that you have opened or created with this app
+            </summary>
+        </member>
+        <member name="P:PGoogleDrive.PGScopes.DriveAppdata">
+            <summary>
+            View and manage its own configuration data in your Google Drive
+            </summary>
+        </member>
+        <member name="P:PGoogleDrive.PGScopes.DriveMetadataReadonly">
+            <summary>
+            View metadata for files in your Google Drive
+            </summary>
+        </member>
+        <member name="P:PGoogleDrive.PGScopes.DriveMetadata">
+            <summary>
+            View and manage metadata of files in your Google Drive
+            </summary>
+        </member>
+        <member name="P:PGoogleDrive.PGScopes.DrivePhotosReadonly">
+            <summary>
+            View the photos, videos and albums in your Google Photos
+            </summary>
+        </member>
+        <member name="P:PGoogleDrive.PGScopes.DriveReadonly">
+            <summary>
+            View the files in your Google Drive
+            </summary>
+        </member>
+        <member name="P:PGoogleDrive.PGScopes.DriveScripts">
+            <summary>
+            Modify your Google Apps Script scripts' behavior
+            </summary>
+        </member>
+        <member name="T:PGoogleDrive.PGSearch">
+            <summary>
+            This class will help you build your search queries using methods that returns SearchBy objects
+            </summary>
+        </member>
+        <member name="M:PGoogleDrive.PGSearch.ByName(PGoogleDrive.Internal.Models.Search.Operators.Name,System.String)">
+            <summary>
+            Searches files by name
+            </summary>
+        </member>
+        <member name="M:PGoogleDrive.PGSearch.IsShared(System.Boolean)">
+            <summary>
+            Searches files by the fact of if there shared with you or not
+            </summary>
+        </member>
+        <member name="M:PGoogleDrive.PGSearch.IsStarred(System.Boolean)">
+            <summary>
+            Searches by starred files or not
+            </summary>
+        </member>
+        <member name="M:PGoogleDrive.PGSearch.IsTrashed(System.Boolean)">
+            <summary>
+            Searches by Is file was trashed or not
+            </summary>
+        </member>
+        <member name="M:PGoogleDrive.PGSearch.ByModifiedTime(PGoogleDrive.Internal.Models.Search.Operators.ModifiedTime,System.DateTime)">
+            <summary>
+            Searches by the last modified time
+            </summary>
+        </member>
+        <member name="M:PGoogleDrive.PGSearch.ByViewedByMeTime(PGoogleDrive.Internal.Models.Search.Operators.ModifiedTime,System.DateTime)">
+            <summary>
+            Searches by last viewed by you timr
+            </summary>
+        </member>
+        <member name="M:PGoogleDrive.PGSearch.InFolder(System.String)">
+            <summary>
+            Searches files from specific folder
+            </summary>
+        </member>
+        <member name="M:PGoogleDrive.PGSearch.InOwners(System.String)">
+            <summary>
+            Searches files which specific user owns
+            </summary>
+        </member>
+        <member name="M:PGoogleDrive.PGSearch.InReaders(System.String)">
+            <summary>
+            Searches files which specific user or group can read
+            </summary>
+        </member>
+        <member name="M:PGoogleDrive.PGSearch.InWriters(System.String)">
+            <summary>
+            Searches files which specific user or group can write
+            </summary>
+        </member>
+        <member name="M:PGoogleDrive.PGSearch.ByMimeType(PGoogleDrive.Internal.Models.Search.Operators.MimeType,System.String)">
+            <summary>
+            Searches files by Mime Type
+            </summary>
+        </member>
+        <member name="M:PGoogleDrive.PGSearch.ByMimeTypeGeneric(PGoogleDrive.Internal.Models.Search.MimeTypes.Generic)">
+            <summary>
+            Searches files by generic mime types
+            </summary>
+            <param name="mime">Contains a collection of a generic mime types</param>
+        </member>
+        <member name="M:PGoogleDrive.PGSearch.ByMimeTypeGoogle(PGoogleDrive.Internal.Models.Search.Operators.MimeType,PGoogleDrive.Internal.Models.Search.MimeTypes.Google)">
+            <summary>
+            Searches by google mime types
+            </summary>
+        </member>
+        <member name="M:PGoogleDrive.PGSearch.ByMimeTypeApplication(PGoogleDrive.Internal.Models.Search.Operators.MimeType,PGoogleDrive.Internal.Models.Search.MimeTypes.Application)">
+            <summary>
+            Searches by application mime types
+            </summary>
+        </member>
+        <member name="M:PGoogleDrive.PGSearch.ByMimeTypeAudio(PGoogleDrive.Internal.Models.Search.Operators.MimeType,PGoogleDrive.Internal.Models.Search.MimeTypes.Audio)">
+            <summary>
+            Searches by audio mime types
+            </summary>
+        </member>
+        <member name="M:PGoogleDrive.PGSearch.ByMimeTypeImage(PGoogleDrive.Internal.Models.Search.Operators.MimeType,PGoogleDrive.Internal.Models.Search.MimeTypes.Image)">
+            <summary>
+            Searches by image mime types
+            </summary>
+        </member>
+        <member name="M:PGoogleDrive.PGSearch.ByMimeTypeText(PGoogleDrive.Internal.Models.Search.Operators.MimeType,PGoogleDrive.Internal.Models.Search.MimeTypes.Text)">
+            <summary>
+            Searches by text mime types
+            </summary>
+        </member>
+        <member name="M:PGoogleDrive.PGSearch.ByMimeTypeVideo(PGoogleDrive.Internal.Models.Search.Operators.MimeType,PGoogleDrive.Internal.Models.Search.MimeTypes.Video)">
+            <summary>
+            Searches by video mime types
+            </summary>
+        </member>
+        <member name="T:PGoogleDrive.PGDrive">
+            <summary>
+            Main class of PGoogleDrive for interaction with Google drive.
+            Contains all methods and modules to use.
+            </summary>
+        </member>
+        <member name="M:PGoogleDrive.PGDrive.GetOAuthDrive(System.String,PGoogleDrive.Internal.Models.Scopes.PGScope,System.Boolean)">
+            <summary>
+            Static method that creates a new object of PGDrive class and authenticates user using OAuth2.0 authorization
+            </summary>
+            <param name="ConfigOAuthDriveName">Name of element in ApiKeyDrives collection of PGDrive section in your config</param>
+            <param name="scopes"> USE PGScopes static class,
+            combine scopes using method And in scope objects.
+            Scopes provides permissions to use your drive.
+            </param>
+            <param name="reCreateOAuthToken">Recreates an access token for current drive if you want to change the scopes</param>
+            <exception cref="T:System.NullReferenceException">Throws if elemtent of OAuthDrives config collection with such name wasn't founded</exception>
+        </member>
+        <member name="M:PGoogleDrive.PGDrive.GetApiKeyDrive(System.String)">
+            <summary>
+            Static method that creates a new object of PGDrive class and authenticates user using ApiKey authorization
+            </summary>
+            <param name="ConfigApiKeyDriveName">Name of element in ApiKeyDrives collection of PGDrive section in your config</param>
+        </member>
+        <member name="P:PGoogleDrive.PGDrive.Permissions">
+            <summary>
+            Contains all methods and properties to work with permissions
+            </summary>
+        </member>
+        <member name="P:PGoogleDrive.PGDrive.Files">
+            <summary>
+            Contains all methods to work with files and folders
+            </summary>
+        </member>
+        <member name="P:PGoogleDrive.PGDrive.Comments">
+            <summary>
+            Contains all methods to work with comments
+            </summary>
+        </member>
+        <member name="P:PGoogleDrive.PGDrive.Replies">
+            <summary>
+            Contains all methods to work with replies to comments
+            </summary>
+        </member>
+    </members>
+</doc>
